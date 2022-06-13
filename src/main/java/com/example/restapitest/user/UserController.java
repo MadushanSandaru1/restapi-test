@@ -38,6 +38,7 @@ public class UserController {
 
         {
             "name": "Sandaruwan",
+            "email": "sandaruwan@gmail.com",
             "dob": "1999-02-18"
         }
 

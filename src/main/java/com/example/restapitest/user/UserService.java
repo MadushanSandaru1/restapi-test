@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -20,6 +21,11 @@ public class UserService {
     }
 
     public void createUser(User user) {
+        Optional<User> optionalUser = userRepository.findUserByEmail(user.getEmail());
+
+        if (optionalUser.isPresent()) {
+            throw new IllegalStateException("Email already exist");
+        }
         userRepository.save(user);
     }
 }
