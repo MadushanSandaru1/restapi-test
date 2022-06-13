@@ -55,4 +55,19 @@ public class UserController {
 
      */
 
+    @PutMapping(path = "/update/{userId}")
+    public void updateUser(
+            @PathVariable("userId") Long userId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email
+    ) {
+        userService.updateUser(userId, name, email);
+    }
+
+    /*
+
+        PUT - http://localhost:8080/api/v1/user/update/2?name=Madushan&email=madushan@gmail.com
+
+     */
+
 }
