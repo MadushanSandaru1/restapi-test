@@ -44,4 +44,15 @@ public class UserController {
 
      */
 
+    @DeleteMapping(path = "/delete/{userId}")
+    public void deleteUser(@PathVariable("userId") Long userId) {
+        userService.deleteUser(userId);
+    }
+
+    /*
+
+        DELETE - http://localhost:8080/api/v1/user/delete/1
+
+     */
+
 }
