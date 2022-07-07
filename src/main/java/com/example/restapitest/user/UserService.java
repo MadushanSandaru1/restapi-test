@@ -22,6 +22,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId).get();
+    }
+
     public void createUser(User user) {
         Optional<User> optionalUser = userRepository.findUserByEmail(user.getEmail());
 
@@ -43,22 +47,26 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(Long userId, String name, String email) {
-        User user = userRepository.findById(userId).orElseThrow(
-                () -> new IllegalStateException("User with id "+ userId+" does not exists")
+    public void updateUser(Long userId, User user) {
+        User u = userRepository.findById(userId).orElseThrow(
+                () -> new IllegalStateException("User with id "+ userId +" does not exists")
         );
 
-        if (name != null && name.length() > 0 && !Objects.equals(user.getName(), name)) {
-            user.setName(name);
+        if (user.getName() != null && user.getName().length() > 0 && !Objects.equals(u.getName(), user.getName())) {
+            u.setName(user.getName());
         }
 
-        if (email != null && email.length() > 0 && !Objects.equals(user.getEmail(), email)) {
-            Optional<User> optionalUser = userRepository.findUserByEmail(user.getEmail());
+        if (user.getEmail() != null && user.getEmail().length() > 0 && !Objects.equals(u.getEmail(), user.getEmail())) {
+            Optional<User> optionalUser = userRepository.findUserByEmail(u.getEmail());
 
             if (optionalUser.isPresent()) {
                 throw new IllegalStateException("Email already exist");
             }
-            user.setEmail(email);
+            u.setEmail(user.getEmail());
+        }
+
+        if (user.getDob() != null && user.getDob().toString().length() > 0 && !Objects.equals(u.getDob(), user.getDob())) {
+            u.setDob(user.getDob());
         }
     }
 }

@@ -27,6 +27,17 @@ public class UserController {
 
      */
 
+    @GetMapping(path = "/{userId}")
+    public User getUserById(@PathVariable("userId") Long userId) {
+        return userService.getUserById(userId);
+    }
+
+    /*
+
+        GET - http://localhost:8080/api/v1/user/1
+
+     */
+
     @PostMapping(path = "/create")
     public void setUser(@RequestBody User user) {
         userService.createUser(user);
@@ -37,9 +48,9 @@ public class UserController {
         POST - http://localhost:8080/api/v1/user/create
 
         {
-            "name": "Sandaruwan",
-            "email": "sandaruwan@gmail.com",
-            "dob": "1999-02-18"
+            "name": "Karunasena",
+            "email": "karunasena@gmail.com",
+            "dob": "1998-01-17"
         }
 
      */
@@ -58,15 +69,20 @@ public class UserController {
     @PutMapping(path = "/update/{userId}")
     public void updateUser(
             @PathVariable("userId") Long userId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String email
+            @RequestBody User user
     ) {
-        userService.updateUser(userId, name, email);
+        userService.updateUser(userId, user);
     }
 
     /*
 
-        PUT - http://localhost:8080/api/v1/user/update/2?name=Madushan&email=madushan@gmail.com
+        PUT - http://localhost:8080/api/v1/user/update/1
+
+        {
+            "name": "Karunasena",
+            "email": "karunasena@gmail.com",
+            "dob": "1998-01-17"
+        }
 
      */
 
