@@ -20,7 +20,7 @@ http://localhost:8080/api/v1/user/all
 
 ### Get user by id - GET 
 ```
-http://localhost:8080/api/v1/user/<enter-id>
+http://localhost:8080/api/v1/user/1
 ```
 
 ### Create user - POST
